@@ -41,4 +41,13 @@ public class UserService {
 		return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
 	}
 	
+	public User update(User changedUser) {
+		
+		Optional<User> originalUser = repo.findById(changedUser.getId());
+		
+		originalUser.get().setName(changedUser.getName());
+		originalUser.get().setEmail(changedUser.getEmail());
+		
+		return repo.save(originalUser.get());
+	}
 }
